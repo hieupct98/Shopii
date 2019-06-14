@@ -1,40 +1,49 @@
 <?php
 require_once('connect.php');
-$emailErr = "";
-$passwordErr = "";
+$error["email"]= "";
+$error["password"]= "";
 if (isset($_POST['btnSubmit'])) {
-    $role = 5;  //5 là giá trị role của khách hàng
     if (isset($_POST['chkRole'])) {
         $role = 2;      //2 là giá trị role của chủ shop
+    } else {
+        $role = 3;  //5 là giá trị role của khách hàng
     }
     if (empty($_POST['email'])) {
-        $emailErr = "Vui lòng nhập email";
-    } else {
-        if (empty($_POST['password'])) {
-            $passwordErr = "Vui lòng nhập mật khẩu";
-        } else {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+        $error["email"] = "Vui lòng nhập email";
+    }
+    if (empty($_POST['password'])) {
+        $error["password"] = "Vui lòng nhập mật khẩu";
+    }
 
-            if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $check = "SELECT * FROM users where email = '$email'";
-                $count = $conn->query($check);
-                if ($count->num_rows > 0) {
-                    $emailErr = "Email đã có người sử dụng";
-                } else {
-                    $insert = "INSERT INTO users(email, password) ";
-                    $insert .= "VALUES ('$email', '$password')";
-                    $result1 = $conn->query($insert);
-                    $last_ID = $conn->insert_id;
-                    $insertRole = "INSERT INTO user_role(userID,roleID) VALUES ($last_ID,$role)";
-                    $result2 = $conn->query($insertRole);
-                    if ($result1 && $result2) {
-                        header("location: reg_success.php");
-                    }
-                }
-            } else {
-                $emailErr = "Email không hợp lệ";
-            }
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    //kiểm tra email hợp lệ
+    if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $check = $conn->prepare("SELECT * FROM users where `email` = ?");
+        $check->bind_param('s', $email);
+        $check->execute();
+        $count = $check->get_result();
+        if ($count->num_rows == 1) {
+            $error["email"] = "Email đã có người sử dụng";
+        }
+    } else {
+        $error["email"] = "Email không hợp lệ";
+    }
+
+    if (empty($error["email"]) && empty($error["password"])) {
+        try {
+            $conn->autocommit(FALSE);
+            $insert = $conn->prepare("INSERT INTO users(email, password) VALUES (?, ?)");
+            $insert->bind_param('ss', $email, $password);
+            $insert->execute();
+            $insertRole = $conn->prepare("INSERT INTO user_role(userID,roleID) VALUES (LAST_INSERT_ID(), ?)");
+            $insertRole->bind_param('i',$role);
+            $insertRole->execute();
+            $conn->autocommit(TRUE);
+            header("Location:reg_success.php");
+        } catch (Exception $e) {
+            $conn->rollback();
+            throw $e;
         }
     }
 }
@@ -54,13 +63,13 @@ if (isset($_POST['btnSubmit'])) {
     <form method="post" action="register.php" style="margin:1% 0 0 2%">
         <div class="forminput">
             <label for="email">Email:</label>
-            <input type="text" name="email" id="email">
-            <span class="error"><?php echo $emailErr; ?></span>
+            <input type="text" name="email" id="email" value="<?php if (isset($_POST['email']) && $_POST['email'] != null) echo $_POST['email'] ?>">
+            <span class="error"><?php echo $error["email"]; ?></span>
             <br>
             <br>
             <label for="password">Password:</label>
             <input type="password" name="password" id="password">
-            <span class="error"><?php echo $passwordErr; ?></span>
+            <span class="error"><?php echo $error["password"]; ?></span>
             <br>
             <br>
             <input type="checkbox" name="chkRole" id="chkRole">

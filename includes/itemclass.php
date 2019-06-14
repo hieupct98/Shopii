@@ -145,7 +145,7 @@ class Item
     {
         $sanitized = [];
         foreach ($this->attributes() as $key => $value) {
-            $sanitized[$key] = self::$database->escape_string($value);
+            $sanitized[$key] = self::$database->real_escape_string($value);
         }
         return $sanitized;
     }
