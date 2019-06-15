@@ -4,17 +4,17 @@ class Item
     static public $table_name = "Products";
     static public $database;
     static protected $columns = [];
-    static public $db_columns = ['ID', 'name', 'catID', 'userID', 'price', 'image', 'description', 'quantity'];
+    static public $db_columns = ['ID', 'name', 'catID', 'price', 'image', 'description', 'quantity'];
 
     public $ID;
     public $name;
     public $catID;
-    public $userID;
     public $price;
     public $image;
     public $descrpition;
     public $quantity;
 
+    public $userID;
     public $category;
     public $user;
 
@@ -23,7 +23,6 @@ class Item
         $this->ID = $data['ID'] ?? '';
         $this->name = $data['name'] ?? '';
         $this->catID = $data['catID'] ?? '';
-        $this->userID = $data['userID'] ?? '';
         $this->price = $data['price'] ?? '';
         $this->image = $data['image'] ?? '';
         $this->description = $data['description'] ?? '';
@@ -85,27 +84,30 @@ class Item
     }
 
 
-    //Lấy tên user khi có userID
+    //Lấy tên người bán khi có productID
     public function getUser()
     {
-        $query = "SELECT * FROM users WHERE ID = '$this->userID'";
+        $query = "SELECT * FROM users INNER JOIN user_product ON users.ID = user_product.userID ";
+        $query .= "INNER JOIN products ON user_product.productID = products.ID WHERE products.ID = '$this->ID'";
         $result = Item::$database->query($query);
         $row = $result->fetch_assoc();
-        $user = (string)$row['email'];
+        $user = $row['email'];
         return $user;
     }
 
     public static function findByUser($uid)
     {
-        $sql = "SELECT * FROM " . static::$table_name . " ";
+        $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN user_product ON products.ID = user_product.productID ";
         $sql .= "WHERE userID='" . self::$database->escape_string($uid) . "'";
         return static::findByQuery($sql);
     }
 
     static public function findByID($id)
     {
-        $sql = "SELECT * FROM " . static::$table_name . " ";
-        $sql .= "WHERE ID='" . self::$database->escape_string($id) . "'";
+        $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN user_product ON products.ID = user_product.productID ";
+        $sql .= "WHERE productID='" . self::$database->escape_string($id) . "'";
         $obj_array = static::findByQuery($sql);
         if (!empty($obj_array)) {
             return array_shift($obj_array);
@@ -141,6 +143,7 @@ class Item
         return $attributes;
     }
 
+    //chống SQL Injection
     protected function sanitized_attributes()
     {
         $sanitized = [];
@@ -152,17 +155,28 @@ class Item
 
     public function create()
     {
-        $attributes = $this->sanitized_attributes();
-        $sql = "INSERT INTO " . static::$table_name . " (";
-        $sql .= join(', ', array_keys($attributes));
-        $sql .= ") VALUES ('";
-        $sql .= join("', '", array_values($attributes));
-        $sql .= "')";
-        $result = self::$database->query($sql);
-        if ($result) {
+        try {
+            self::$database->autocommit(FALSE);
+            $attributes = $this->sanitized_attributes();
+            $sql = "INSERT INTO " . static::$table_name . " (";
+            $sql .= join(', ', array_keys($attributes));
+            $sql .= ") VALUES ('";
+            $sql .= join("', '", array_values($attributes));
+            $sql .= "')";
+            self::$database->query($sql);
             $this->ID = self::$database->insert_id;
+            $this->userID = $_SESSION['ID'];
+            echo $this->ID;
+            echo $this->userID;
+            $sql2 = "INSERT INTO user_product(userID,productID) VALUE ($this->userID,LAST_INSERT_ID())";
+            self::$database->query($sql2);
+            self::$database->autocommit(TRUE);
+            return true;
+        } catch (Exception $e) {
+            self::$database->rollback();
+            throw $e;
+            return false;
         }
-        return $result;
     }
 
     public function merge_attributes($args = [])

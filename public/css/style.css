@@ -1,6 +1,10 @@
 * {
-    margin-left: 2%;
+    margin:0;
     padding: 0;
+}
+
+.top {
+    background: linear-gradient(-180deg,#f53d2d,#f63);
 }
 
 .tblLogin {
@@ -15,9 +19,38 @@
     width: 35%;
 }
 
+.nav-link {
+    color: white;
+}
+
+.htext a {
+    font-size: 36px;
+}
+
+.htext a:hover {
+    color: white;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, .7);
+}
+
+.btn-search {
+    background: blue;
+}
+
+.spacebetween {
+    display: flex;
+    justify-content: space-between;
+}
+
 .error {
     color: #FF0000;
 }
+
+.dropdown:hover>.dropdown-menu {
+    display: block !important;
+  }
 
 .btnSubmit {
     background-color: #0099ff;
