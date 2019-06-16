@@ -11,8 +11,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/css/style.css" type="text/css">
     <link rel="stylesheet" href="public/css/bootstrap.css" type="text/css">
-    <!-- <script src="public/js/bootstrap.js"></script>
-    <script src="public/js/bootstrap.bundle.js"></script> -->
+    
     <title>Shopiii</title>
 </head>
 
@@ -33,16 +32,16 @@ session_start();
                     <div class="d-flex">
                         <a href="cart.php" class="nav-link">Giỏ hàng</a>
                         <?php if (isLoggedIn()) { ?>
-                        <!-- <div class="nav-item dropdown">
+                        <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <?php echo $_SESSION['email']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="logout.php" class="nav-link">Đăng xuất</a>
+                                <a href="logout.php" class="nav-link" style="color:black;">Đăng xuất</a>
                             </div>
-                        </div> -->
-                        <a href="logout.php" class="nav-link">Đăng xuất</a>
+                        </div>
+                        <!-- <a href="logout.php" class="nav-link">Đăng xuất</a> -->
                         <?php } else { ?>
                         <a href="login.php" class="nav-link">Đăng nhập</a>
                         <a href="register.php" class="nav-link">Đăng ký</a>
@@ -62,3 +61,12 @@ session_start();
             </div>
         </div>
     </header>
+    <br>
+
+    <?php 
+    if(isset($_SESSION['message']) && $_SESSION['message'] != "") {
+        echo "<div class='message container'>";
+        echo $_SESSION['message'];
+        clearMessage();
+        echo "</div>";
+    } ?>

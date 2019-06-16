@@ -43,10 +43,19 @@ if (!isSeller()) {
                         <a class="nav-link" href="../index.php">Shopii</a>
                     </div>
                     <form class="form-inline my-2 my-lg-0 ml-lg-5">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
+                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm"
+                            aria-label="Search">
                         <button class="btn btn-info" type="submit">Tìm kiếm</button>
                     </form>
                 </div>
             </div>
         </div>
     </header>
+
+    <?php 
+    if(isset($_SESSION['message']) && $_SESSION['message'] != "") {
+        echo "<div class='message container'>";
+        echo $_SESSION['message'];
+        clearMessage();
+        echo "</div>";
+    } ?>

@@ -40,7 +40,8 @@ if (isset($_POST['btnSubmit'])) {
             $insertRole->bind_param('i',$role);
             $insertRole->execute();
             $conn->autocommit(TRUE);
-            header("Location:includes/reg_success.php");
+            $_SESSION['message']="Bạn đã đăng ký thành công";
+            header("Location:index.php");
         } catch (Exception $e) {
             $conn->rollback();
             throw $e;
@@ -48,6 +49,8 @@ if (isset($_POST['btnSubmit'])) {
     }
 }
 ?>
+<div class="container">
+    <h1>Đăng ký:</h1>
     <form method="post" action="register.php" style="margin:1% 0 0 2%">
         <div class="form-group">
             <label for="email">Email:</label>
@@ -64,8 +67,8 @@ if (isset($_POST['btnSubmit'])) {
             <input type="checkbox" class="form-check-input" name="chkRole" id="chkRole">
             <label for="chkRole">Đăng ký với tư cách chủ shop</label>
         </div>
-            <input type="submit" class="btn btn-primary" name="btnSubmit" value="Đăng ký">
+        <input type="submit" class="btn btn-primary" name="btnSubmit" value="Đăng ký">
     </form>
-</body>
+</div>
 
-</html>
+<?php require_once("includes/footer.php"); ?>

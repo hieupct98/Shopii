@@ -46,6 +46,8 @@ if (isset($_POST['btnSubmit'])) {
     }
 }
 ?>
+<div class="container">
+    <h1>Đăng nhập:</h1>
     <form method="post" action="login.php" style="margin:1% 0 0 2%">
         <div class="form-group">
             <label for="email">Email:</label>
@@ -60,6 +62,6 @@ if (isset($_POST['btnSubmit'])) {
         </div>
         <input type="submit" class="btn btn-primary" name="btnSubmit" value="Đăng nhập">
     </form>
-</body>
+</div>
 
-</html>
+<?php require_once("includes/footer.php"); ?>

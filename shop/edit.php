@@ -25,6 +25,7 @@ if (isset($_POST['edit'])) {
     $result = $item->update();
 
     if ($result === true) {
+        $_SESSION['message'] = "Sửa thành công sản phẩm $item->name";
         if (!file_exists("../img/{$img}")) {
             move_uploaded_file($temp, "../img/$img");
         }
@@ -40,12 +41,12 @@ if (isset($_POST['edit'])) {
 
         <div class="form-group">
             <label for="item[name]">Tên sản phẩm: </label>
-            <input type="text" class="form-control" name="item[name]" value="<?php echo htmlspecialchars($item->name) ?>">
+            <input type="text" class="form-control" name="item[name]" id="item[name]" value="<?php echo htmlspecialchars($item->name) ?>">
         </div>
 
         <div class="form-group">
             <label for="item[catID]">Danh mục: </label>
-            <select name="item[catID]" class="custom-select">
+            <select name="item[catID]" id="item[catID]" class="custom-select">
                 <?php
                 $getCatID = "SELECT * FROM categories";
                 $queryCatID = mysqli_query($conn, $getCatID);
@@ -67,23 +68,22 @@ if (isset($_POST['edit'])) {
 
         <div class="form-group">
             <label for="item[price]">Giá sản phẩm: </label>
-            <input type="text" class="form-control" name="item[price]" value="<?php echo htmlspecialchars($item->price) ?>">
+            <input type="text" class="form-control" name="item[price]" id="item[price]" value="<?php echo htmlspecialchars($item->price) ?>">
         </div>
 
-        Ảnh sản phẩm:
         <div class="custom-file">
-            <label for="image" class="custom-file-label">Chọn ảnh</label>
-            <input type="file" class="custom-file-input" name="image" value="<?php echo htmlspecialchars($item->image) ?>">
+            <label for="image">Chọn ảnh</label>
+            <input type="file" class="form-control-file" name="image" id="image" value="<?php echo htmlspecialchars($item->image) ?>">
         </div>
 
         <div class="form-group">
             <label for="item[description]">Mô tả: </label>
-            <textarea name="item[description]" class="form-control" cols="30" rows="5"><?php echo htmlspecialchars($item->description) ?></textarea>
+            <textarea name="item[description]" id="item[description]" class="form-control" cols="30" rows="5"><?php echo htmlspecialchars($item->description) ?></textarea>
         </div>
 
         <div class="form-group">
             <label for="item[quantity]">Số lượng: </label>
-            <input type="text" name="item[quantity]" class="form-control" value="<?php echo htmlspecialchars($item->quantity) ?>">
+            <input type="text" name="item[quantity]" id="item[quantity]" class="form-control" value="<?php echo htmlspecialchars($item->quantity) ?>">
         </div>
         <br><br>
         <input type="submit" class="btn btn-primary" name="edit" value="Lưu">

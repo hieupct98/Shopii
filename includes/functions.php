@@ -13,3 +13,8 @@ function isLoggedIn()
 {
     return isset($_SESSION['email']);
 }
+
+function clearMessage()
+{
+    unset($_SESSION['message']);
+}
