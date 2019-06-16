@@ -11,12 +11,14 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="public/css/style.css" type="text/css">
     <link rel="stylesheet" href="public/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="public/css/slick.css" type="text/css">
+    <link rel="stylesheet" href="public/css/slick-theme.css" type="text/css">
     
     <title>Shopiii</title>
 </head>
 
 <body>
-
+    <!-- begin nav -->
     <header>
         <div class="top">
             <div class="container">
@@ -70,3 +72,4 @@ session_start();
         clearMessage();
         echo "</div>";
     } ?>
+    <!-- end nav -->
