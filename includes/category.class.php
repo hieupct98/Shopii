@@ -4,9 +4,9 @@ class Category
     static public $table_name = "Categories";
     static public $database;
     static protected $columns = [];
-    static public $db_columns = ['ID', 'Name'];
+    static public $db_columns = ['id', 'Name'];
 
-    public $ID;
+    public $id;
     public $Name;
 
     /**
@@ -16,7 +16,7 @@ class Category
      */
     public function __construct($data = [])
     {
-        $this->ID = $data['ID'] ?? '';
+        $this->id = $data['id'] ?? '';
         $this->Name = $data['Name'] ?? '';
     }
 

@@ -96,7 +96,7 @@ class Item
     public function getCategory(): string
     {
         $catID = $this->catID;
-        $query = "SELECT * FROM categories WHERE ID = '$catID'";
+        $query = "SELECT * FROM categories WHERE id = '$catID'";
         $result = Item::$database->query($query);
         $row = $result->fetch_assoc();
         $category = $row['Name'];
@@ -145,7 +145,7 @@ class Item
     public static function findByCategory($cat)
     {
         $sql = "SELECT * FROM " . static::$table_name;
-        $sql .= " INNER JOIN categories ON products.catID = categories.ID ";
+        $sql .= " INNER JOIN categories ON products.catID = categories.id ";
         $sql .= "WHERE categories.Name='" . self::$database->escape_string($cat) . "'";
         return static::findByQuery($sql);
     }
