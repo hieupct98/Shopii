@@ -1,25 +1,28 @@
 * {
-    margin:0;
+    margin: 0;
     padding: 0;
 }
 
-body{
+body {
     font-family: Helvetica, sans-serif;
     font-size: 16px;
     color: #000;
 }
-a{
+
+a {
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     text-decoration: none !important;
 }
 
-img{
+img {
     width: 100%;
 }
+
 .top {
-    background: linear-gradient(-180deg,#f53d2d,#f63);
+    background: linear-gradient(-180deg, #f53d2d, #f63);
 }
 
 .tblLogin {
@@ -94,50 +97,56 @@ img{
 }
 
 
-.wrapper-title-boss{
+.wrapper-title-boss {
     padding-top: 10px;
-    padding-bottom:10px;
+    padding-bottom: 10px;
     padding-left: 5px;
     color: #ee4d2d;
     text-transform: uppercase;
     font-weight: 500;
 }
-.wrapper-category{
+
+.wrapper-category {
     width: 100%;
     background: rgb(245, 245, 245);
 }
 
-.wrapper-category .product{
-    margin:5px;
+.wrapper-category .product {
+    margin: 5px;
     background: #fff;
 }
-.product:hover{
+
+.product:hover {
     border: solid 1px #ee4d2d;
 }
-.price{
+
+.price {
     color: #ee4d2d;
 }
-.wrapper-category .detail{
+
+.wrapper-category .detail {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
-.wrapper-category .infor{
+
+.wrapper-category .infor {
     padding: 5px;
 }
-.wrapper-category .cost{
+
+.wrapper-category .cost {
     font-size: 1rem;
 }
 
-.wrapper-category .buy{
+.wrapper-category .buy {
     font-size: 0.75rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: rgba(0,0,0,.54);
+    color: rgba(0, 0, 0, .54);
 }
 
-.wrapper-category .title-product{
+.wrapper-category .title-product {
     word-wrap: break-word;
     line-height: 1.125rem;
     height: 2.25rem;
