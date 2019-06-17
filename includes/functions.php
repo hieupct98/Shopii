@@ -23,3 +23,10 @@ function clearError()
 {
     unset($_SESSION['error']);
 }
+
+function priceFormat($price)
+{
+    $symbol_thousand = '.';
+    $decimal_place = 0;
+    return number_format($price, $decimal_place, '', $symbol_thousand);
+}

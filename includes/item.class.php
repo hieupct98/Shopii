@@ -99,7 +99,7 @@ class Item
         $query = "SELECT * FROM categories WHERE ID = '$catID'";
         $result = Item::$database->query($query);
         $row = $result->fetch_assoc();
-        $category = $row['name'];
+        $category = $row['Name'];
         return $category;
     }
 
@@ -140,6 +140,14 @@ class Item
         } else {
             return false;
         }
+    }
+
+    public static function findByCategory($cat)
+    {
+        $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN categories ON products.catID = categories.ID ";
+        $sql .= "WHERE categories.Name='" . self::$database->escape_string($cat) . "'";
+        return static::findByQuery($sql);
     }
 
     static public function findAll()

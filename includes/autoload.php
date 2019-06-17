@@ -6,4 +6,5 @@ require_once("category.class.php");
 require_once("functions.php");
 global $conn;
 Item::setDB($conn);
+Category::setDB($conn);
 ?>

@@ -174,42 +174,49 @@
             </div>
         </div>
         <!-- end list item -->
-        <table>
-            <tr>
-                <th>Tên</th>
-                <th>Danh mục</th>
-                <th>Giá</th>
-                <th>Ảnh</th>
-                <th>Mô tả</th>
-                <th>Số lượng</th>
-                <th>Xem</th>
-            </tr>
-
-            <?php
-        $items = Item::findAll();
-        ?>
-
-            <?php foreach ($items as $sp) { ?>
-            <tr>
-                <td><?php echo htmlspecialchars($sp->name); ?></td>
-                <td>
-                    <?php
-                    $sp->category = $sp->getCategory();
-                    echo htmlspecialchars($sp->category);
-                    ?>
-                </td>
-                <td><?php echo htmlspecialchars($sp->price); ?></td>
-                <td style="width:200px"><img style="width:100%" src="img/<?php echo htmlspecialchars($sp->image); ?>"
-                        alt="<?php echo htmlspecialchars($sp->name); ?>"></td>
-                <td><?php echo htmlspecialchars($sp->description); ?></td>
-                <td><?php echo htmlspecialchars($sp->quantity); ?></td>
-                <td><a href="detail.php?id=<?php echo $sp->ID; ?>">View</a></td>
-            </tr>
-            <?php } ?>
-
-        </table>
+        <br>
+        <!-- list item 2 -->
+        <?php
+        $category = Category::findAll();
+        foreach ($category as $cat) { ?>      
+        <div class="boss">
+            <div class="wrapper-title-boss">
+                <?php echo htmlspecialchars($cat->Name); ?>
+            </div>
+            
+            <div class="wrapper-category product-new slider slider-nav">
+                <!-- pd1 -->
+                <?php
+                $items = Item::findByCategory($cat->Name);
+                foreach ($items as $sp) { ?>
+                <div class="product">
+                    <a href="detail.php?id=<?php echo $sp->ID; ?>">
+                        <div class="img-product">
+                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
+                            alt="<?php echo htmlspecialchars($sp->name); ?>">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                <?php echo htmlspecialchars($sp->name); ?>
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
+                                </div>
+                                <div class="buy">
+                                <?php echo htmlspecialchars($sp->quantity) . " còn lại"; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+            <br>  
+        <?php } ?>
+        <!-- end list item -->
     </div>
 </div>
 
 <?php require_once("includes/footer.php"); ?>
-

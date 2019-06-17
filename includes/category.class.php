@@ -4,10 +4,10 @@ class Category
     static public $table_name = "Categories";
     static public $database;
     static protected $columns = [];
-    static public $db_columns = ['ID', 'name'];
+    static public $db_columns = ['ID', 'Name'];
 
     public $ID;
-    public $name;
+    public $Name;
 
     /**
      * 
@@ -17,7 +17,7 @@ class Category
     public function __construct($data = [])
     {
         $this->ID = $data['ID'] ?? '';
-        $this->name = $data['name'] ?? '';
+        $this->Name = $data['Name'] ?? '';
     }
 
     /**
@@ -26,6 +26,22 @@ class Category
     static public function setDB($db)
     {
         self::$database = $db;
+    }
+
+    /**
+     * Hàm giúp chuyển dữ liệu vào trong đối tượng
+     * @param $record
+     * @return Category
+     */
+    static protected function instantiate($record)
+    {
+        $object = new static;
+        foreach ($record as $property => $value) {
+            if (property_exists($object, $property)) {
+                $object->$property = $value;
+            }
+        }
+        return $object;
     }
 
     static public function findByQuery($sql)
