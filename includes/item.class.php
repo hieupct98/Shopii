@@ -4,7 +4,7 @@ class Item
     static public $table_name = "Products";
     static public $database;
     static protected $columns = [];
-    static public $db_columns = ['ID', 'name', 'catID', 'price', 'image', 'description', 'quantity'];
+    static public $db_columns = ['ID', 'name', 'catID', 'price', 'image', 'description', 'quantity', 'create_at'];
 
     public $ID;
     public $name;
@@ -13,6 +13,7 @@ class Item
     public $image;
     public $descrpition;
     public $quantity;
+    public $create_at;
 
     public $userID;
     public $category;
@@ -27,6 +28,7 @@ class Item
         $this->image = $data['image'] ?? '';
         $this->description = $data['description'] ?? '';
         $this->quantity = $data['quantity'] ?? '';
+        $this->create_at = $data['create_at'] ?? '';
     }
 
     static public function setDB($db)
@@ -125,18 +127,20 @@ class Item
     public function delete()
     {
         self::$database->autocommit(FALSE);
-        $sql = "DELETE FROM " . static::$table_name . " ";
-        $sql .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
-        $sql .= "LIMIT 1";
+        $sql = "DELETE FROM user_product WHERE productID = $this->ID";
         self::$database->query($sql);
-        if (!self::$database->affected_rows) {
+        echo self::$database->affected_rows;
+        if (self::$database->affected_rows <= 0) {
             self::$database->rollback();
             return false;
         } else {
-            $this->userID = $_SESSION['ID'];
-            $sql2 = "DELETE FROM user_product(userID,productID) WHERE productID = $this->ID";
+            echo self::$database->affected_rows;
+            $sql2 = "DELETE FROM " . static::$table_name . " ";
+            $sql2 .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
+            $sql2 .= "LIMIT 1";
             self::$database->query($sql2);
-            if (!self::$database->affected_rows) {
+            echo self::$database->affected_rows;
+            if (self::$database->affected_rows <= 0) {
                 self::$database->rollback();
                 return false;
             } else {
@@ -181,14 +185,14 @@ class Item
         $sql .= join("', '", array_values($attributes));
         $sql .= "')";
         self::$database->query($sql);
-        if (!self::$database->affected_rows) {
+        if (self::$database->affected_rows <= 0) {
             self::$database->rollback();
             return false;
         } else {
             $this->userID = $_SESSION['ID'];
             $sql2 = "INSERT INTO user_product(userID,productID) VALUE ($this->userID,LAST_INSERT_ID())";
             self::$database->query($sql2);
-            if (!self::$database->affected_rows) {
+            if (self::$database->affected_rows <= 0) {
                 self::$database->rollback();
                 return false;
             } else {
@@ -214,7 +218,6 @@ class Item
         foreach ($attributes as $key => $value) {
             $attribute_pairs[] = "{$key}='{$value}'";
         }
-
         $sql = "UPDATE " . static::$table_name . " SET ";
         $sql .= join(', ', $attribute_pairs);
         $sql .= " WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
