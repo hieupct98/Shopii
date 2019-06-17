@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2019 at 06:31 PM
+-- Generation Time: Jun 16, 2019 at 04:25 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -62,8 +62,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ID`, `name`, `catID`, `price`, `image`, `description`, `quantity`) VALUES
-(1, 'Samsung galaxy note 8', 1, 12000000, 'samsung-galaxy-note8.jpg', 'galaxy note 8', 7),
-(8, 'iPhone 5', 1, 500000, 'iphone-7-plus.jpg', 'ád', 4);
+(1, 'Samsung galaxy note 8', 1, 10000000, 'samsung-galaxy-note8.jpg', 'galaxy note 8', 7),
+(8, 'iPhone 5', 1, 500000, 'iphone-7-plus.jpg', 'ád', 4),
+(9, 'Galaxy S10+', 1, 13000000, 'samsung-galaxy-s10-plus.jpg', 'Thiết kế sang trọng, bóng bẩy', 46);
 
 -- --------------------------------------------------------
 
@@ -103,7 +104,11 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`ID`, `email`, `password`) VALUES
 (1, 'admin@gmail.com', '$2y$10$EG5v/i48qJlo54bIp0BnbuqBDil9uPXePOh.mytHeP3L17cWGlpri'),
-(2, 'anhthu.3198@gmail.com', '$2y$10$ustb8ZyUWlaQdRDExIL.Y.00pkNS8McLHluFdRuWPhGZB5olvxzf.');
+(2, 'anhthu.3198@gmail.com', '$2y$10$ustb8ZyUWlaQdRDExIL.Y.00pkNS8McLHluFdRuWPhGZB5olvxzf.'),
+(3, 'hieupct98@gmail.com', '$2y$10$tEAC6JBv2.e2yPdoRFRuOuc56kX1MfJW.6pT8DsCWuCHGEN/EPeTC'),
+(4, 'hieu@gmail.com', '$2y$10$j62hX9UAFZDAskTt3VM79.RGSjDV.YWDr6u0ixI2Xu5dg4kgqhk/u'),
+(5, 'a@gmail.com', '$2y$10$2yMvS24BOxvPCP90WpOfQeHjT7DHQOMbLgEdgk/RF3tw10hJZ07yO'),
+(6, 'abc@abc.com', '$2y$10$cWpaEQ3UURh63LMUWxVyvOKIwycj68DSAOpL/yBwi1p41.wI8IFwC');
 
 -- --------------------------------------------------------
 
@@ -123,7 +128,8 @@ CREATE TABLE `user_product` (
 
 INSERT INTO `user_product` (`id`, `userID`, `productID`) VALUES
 (1, 2, 1),
-(3, 2, 8);
+(3, 2, 8),
+(4, 3, 9);
 
 -- --------------------------------------------------------
 
@@ -143,7 +149,11 @@ CREATE TABLE `user_role` (
 
 INSERT INTO `user_role` (`ID`, `userID`, `roleID`) VALUES
 (1, 1, 1),
-(2, 2, 2);
+(2, 2, 2),
+(3, 3, 2),
+(4, 4, 3),
+(5, 5, 3),
+(6, 6, 3);
 
 --
 -- Indexes for dumped tables
@@ -204,7 +214,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -216,19 +226,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user_product`
 --
 ALTER TABLE `user_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_role`
 --
 ALTER TABLE `user_role`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

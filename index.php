@@ -30,6 +30,127 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+
+        <!-- begin list item -->
+        <div class="boss">
+            <div class="wrapper-title-boss">
+                San pham moi
+            </div>
+            
+            <div class="wrapper-category product-new slider slider-nav">
+                <!-- pd1 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/iphone-7-plus.jpg" alt="iphone-7-plus.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- pd2 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/oppo-a5s.jpg" alt="oppo-a5s.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- pd3 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/iphone-7-plus.jpg" alt="iphone-7-plus.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- pd4 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/samsung-galaxy-note8.jpg" alt="samsung-galaxy-note8.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- pd5 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/samsung-galaxy-s10-plus.jpg" alt="iphone-7-plus.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- end list item -->
         <table>
             <tr>
                 <th>Tên</th>
@@ -68,3 +189,4 @@
 </div>
 
 <?php require_once("includes/footer.php"); ?>
+
