@@ -31,20 +31,25 @@ if (isset($_POST['btnSubmit'])) {
     }
 
     if (empty($error["email"]) && empty($error["password"])) {
-        try {
-            $conn->autocommit(FALSE);
-            $insert = $conn->prepare("INSERT INTO users(email, password) VALUES (?, ?)");
-            $insert->bind_param('ss', $email, $password);
-            $insert->execute();
+        $conn->autocommit(FALSE);
+        $insert = $conn->prepare("INSERT INTO users(email, password) VALUES (?, ?)");
+        $insert->bind_param('ss', $email, $password);
+        $insert->execute();
+        if (!$conn->affeted_rows) {
+            $conn->rollback();
+            $_SESSION['error'] = "Đăng ký thất bại";
+        } else {
             $insertRole = $conn->prepare("INSERT INTO user_role(userID,roleID) VALUES (LAST_INSERT_ID(), ?)");
             $insertRole->bind_param('i',$role);
             $insertRole->execute();
-            $conn->autocommit(TRUE);
-            $_SESSION['message']="Bạn đã đăng ký thành công";
-            header("Location:index.php");
-        } catch (Exception $e) {
-            $conn->rollback();
-            throw $e;
+            if (!$conn->affeted_rows) {
+                $conn->rollback();
+                $_SESSION['error'] = "Đăng ký thất bại";
+            } else {
+                $conn->commit();
+                $_SESSION['message']="Bạn đã đăng ký thành công";
+                header("Location:index.php");
+            }
         }
     }
 }

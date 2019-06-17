@@ -1,5 +1,4 @@
 <?php
-require_once("shop_header.php");
 if (isset($_POST['add'])) {
     $data = $_POST['item'];
     $data['image'] = $conn->real_escape_string($_FILES['image']['name']);
@@ -12,8 +11,12 @@ if (isset($_POST['add'])) {
         move_uploaded_file($temp, "../img/$img");
         $_SESSION['message'] = "Đã thêm sản phẩm mới với tên là $item->name";
         header("Location:index.php");
+    } else {
+        $_SESSION['error'] = "Thêm sản phẩm thất bại";
     }
-} ?>
+}
+require_once("shop_header.php");
+?>
 <div class="container">
     <br>
     <br>

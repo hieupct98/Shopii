@@ -18,3 +18,8 @@ function clearMessage()
 {
     unset($_SESSION['message']);
 }
+
+function clearError()
+{
+    unset($_SESSION['error']);
+}

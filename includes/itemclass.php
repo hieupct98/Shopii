@@ -124,11 +124,26 @@ class Item
 
     public function delete()
     {
+        self::$database->autocommit(FALSE);
         $sql = "DELETE FROM " . static::$table_name . " ";
         $sql .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
         $sql .= "LIMIT 1";
-        $result = self::$database->query($sql);
-        return $result;
+        self::$database->query($sql);
+        if (!self::$database->affected_rows) {
+            self::$database->rollback();
+            return false;
+        } else {
+            $this->userID = $_SESSION['ID'];
+            $sql2 = "DELETE FROM user_product(userID,productID) WHERE productID = $this->ID";
+            self::$database->query($sql2);
+            if (!self::$database->affected_rows) {
+                self::$database->rollback();
+                return false;
+            } else {
+                self::$database->commit();
+                return true;
+            }
+        }
     }
 
     public function attributes()

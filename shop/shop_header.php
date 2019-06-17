@@ -54,8 +54,16 @@ if (!isSeller()) {
 
     <?php 
     if(isset($_SESSION['message']) && $_SESSION['message'] != "") {
-        echo "<div class='message container'>";
+        echo "<div class='alert alert-success' role='alert'>";
         echo $_SESSION['message'];
         clearMessage();
         echo "</div>";
-    } ?>
+    } 
+    if (isset($_SESSION['error']) && $_SESSION['error'] != "") {
+        echo "<div class='alert alert-danger' role='alert'>";
+        echo $_SESSION['error'];
+        clearError();
+        echo "</div>";
+    }
+    ?>
+

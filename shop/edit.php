@@ -30,6 +30,8 @@ if (isset($_POST['edit'])) {
             move_uploaded_file($temp, "../img/$img");
         }
         header("Location:index.php");
+    } else {
+        $_SESSION['error'] = "Thêm sản phẩm thất bại";
     }
 } ?>
 <div class="container">
