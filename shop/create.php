@@ -1,9 +1,11 @@
 <?php
+require_once("shop_header.php");
 if (isset($_POST['add'])) {
     $data = $_POST['item'];
     $data['image'] = $conn->real_escape_string($_FILES['image']['name']);
     $img = $data['image'];
     $temp = $_FILES['image']['tmp_name'];
+    $data['create_at'] = date("Y-m-d H:i:s");
     $item = new Item($data);
     $result = $item->create();
 
@@ -13,9 +15,9 @@ if (isset($_POST['add'])) {
         header("Location:index.php");
     } else {
         $_SESSION['error'] = "Thêm sản phẩm thất bại";
+        header("Location:index.php");
     }
 }
-require_once("shop_header.php");
 ?>
 <div class="container">
     <br>

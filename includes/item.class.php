@@ -19,6 +19,10 @@ class Item
     public $category;
     public $user;
 
+    /**
+     * Item constructor.
+     * @param array $data
+     */
     public function __construct($data = [])
     {
         $this->ID = $data['ID'] ?? '';
@@ -31,12 +35,19 @@ class Item
         $this->create_at = $data['create_at'] ?? '';
     }
 
+    /**
+     * @param $db
+     */
     static public function setDB($db)
     {
         self::$database = $db;
     }
 
-    //Hàm giúp chuyển dữ liệu vào trong đối tượng
+    /**
+     * Hàm giúp chuyển dữ liệu vào trong đối tượng
+     * @param $record
+     * @return Item
+     */
     static protected function instantiate($record)
     {
         $object = new static;
@@ -48,6 +59,10 @@ class Item
         return $object;
     }
 
+    /**
+     * @param $sql
+     * @return array
+     */
     static public function findByQuery($sql)
     {
         $result = static::$database->query($sql);
@@ -65,6 +80,9 @@ class Item
         return $object_array;
     }
 
+    /**
+     * @return mixed
+     */
     static public function count_all()
     {
         $sql = "SELECT COUNT(*) FROM " . static::$table_name;
@@ -97,6 +115,12 @@ class Item
         return $user;
     }
 
+    /**
+     * 
+     *Hàm giúp tìm sản phẩm khi biết người bán
+     * @param [type] $uid
+     * @return Item
+     */
     public static function findByUser($uid)
     {
         $sql = "SELECT * FROM " . static::$table_name;

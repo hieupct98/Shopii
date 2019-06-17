@@ -35,16 +35,17 @@ if (isset($_POST['btnSubmit'])) {
         $insert = $conn->prepare("INSERT INTO users(email, password) VALUES (?, ?)");
         $insert->bind_param('ss', $email, $password);
         $insert->execute();
-        if (!$conn->affeted_rows) {
+        if (self::$database->affected_rows <= 0) {
             $conn->rollback();
             $_SESSION['error'] = "Đăng ký thất bại";
         } else {
             $insertRole = $conn->prepare("INSERT INTO user_role(userID,roleID) VALUES (LAST_INSERT_ID(), ?)");
             $insertRole->bind_param('i',$role);
             $insertRole->execute();
-            if (!$conn->affeted_rows) {
+            if (self::$database->affected_rows <= 0) {
                 $conn->rollback();
                 $_SESSION['error'] = "Đăng ký thất bại";
+                header("Location:index.php");
             } else {
                 $conn->commit();
                 $_SESSION['message']="Bạn đã đăng ký thành công";
