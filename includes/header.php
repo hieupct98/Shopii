@@ -43,7 +43,6 @@ session_start();
                                 <a href="logout.php" class="nav-link" style="color:black;">Đăng xuất</a>
                             </div>
                         </div>
-                        <!-- <a href="logout.php" class="nav-link">Đăng xuất</a> -->
                         <?php } else { ?>
                         <a href="login.php" class="nav-link">Đăng nhập</a>
                         <a href="register.php" class="nav-link">Đăng ký</a>
@@ -57,7 +56,7 @@ session_start();
                     <form class="form-inline frmSearch my-2 my-lg-0 ml-lg-5">
                         <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm"
                             aria-label="Search">
-                        <button class="btn btn-info" type="submit">Tìm kiếm</button>
+                        <input type="submit" class="btn btn-primary" value="Tìm kiếm">
                     </form>
                 </div>
             </div>

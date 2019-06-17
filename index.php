@@ -175,7 +175,42 @@
         </div>
         <!-- end list item -->
         <br>
-        <!-- list item 2 -->
+        <!-- list item sp mới -->
+        <div class="boss">
+            <div class="wrapper-title-boss">
+                Sản phẩm mới
+            </div>
+            
+            <div class="wrapper-category product-new slider slider-nav">
+                <?php
+                $items = Item::topNewProducts(6);
+                foreach ($items as $sp) { ?>
+                <div class="product">
+                    <a href="detail.php?id=<?php echo $sp->ID; ?>">
+                        <div class="img-product">
+                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
+                            alt="<?php echo htmlspecialchars($sp->name); ?>">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                <?php echo htmlspecialchars($sp->name); ?>
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
+                                </div>
+                                <div class="buy">
+                                <?php echo htmlspecialchars($sp->quantity) . " còn lại"; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <?php } ?>
+            </div>
+        <!-- end list item sp mới -->
+        <!-- list item Category -->
         <?php
         $category = Category::findAll();
         foreach ($category as $cat) { ?>      

@@ -35,16 +35,10 @@ if (isset($_POST['add'])) {
             <label for="item[catID]">Danh mục: </label>
             <select name="item[catID]" id="item[catID]" class="custom-select">
                 <?php
-            $getCatID = "SELECT * FROM categories";
-            $queryCatID = mysqli_query($conn, $getCatID);
-            while ($row = mysqli_fetch_assoc($queryCatID)) {
-                $catID = $row['ID'];
-                $cat = $row['name'];
-                ?>
-                <option value="<?php echo $catID ?>"><?php echo $cat ?></option>
-                <?php
-        }
-        ?>
+                $category = Category::findAll();
+                foreach ($category as $cat) { ?>
+                <option value="<?php echo $cat->id ?>"><?php echo $cat->Name ?></option>
+                <?php } ?>
             </select>
         </div>
 
@@ -54,13 +48,14 @@ if (isset($_POST['add'])) {
         </div>
 
         <div class="form-group">
-            <label for="image" >Chọn ảnh</label>
+            <label for="image">Chọn ảnh</label>
             <input type="file" class="form-control-file" name="image" id="image">
         </div>
 
         <div class="form-group">
             <label for="item[description]">Mô tả: </label>
-            <textarea name="item[description]" id="item[description]" class="form-control" cols="30" rows="5"></textarea>
+            <textarea name="item[description]" id="item[description]" class="form-control" cols="30"
+                rows="5"></textarea>
         </div>
 
         <div class="form-group">

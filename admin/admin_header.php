@@ -1,7 +1,7 @@
 <?php
 require_once("../includes/autoload.php");
 session_start();
-if (!isSeller()) {
+if (!isAdmin()) {
     header("Location:../index.php");
 }
 ?>
@@ -14,7 +14,7 @@ if (!isSeller()) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../public/css/style.css" type="text/css">
     <link rel="stylesheet" href="../public/css/bootstrap.css" type="text/css">
-    <title>Shopiii - Kênh người bán</title>
+    <title>Shopii - Quản lý</title>
 </head>
 
 <body>
@@ -24,8 +24,8 @@ if (!isSeller()) {
             <div class="container">
                 <div class="spacebetween">
                     <div>
-                        <?php if (isSeller()) { ?>
-                        <a href="index.php" class="nav-link">Kênh người bán</a>
+                        <?php if (isAdmin()) { ?>
+                        <a href="index.php" class="nav-link">Quản lý</a>
                         <?php } ?>
                     </div>
                     <div class="d-flex">
@@ -83,6 +83,6 @@ if (!isSeller()) {
             </button>
         </div>
         <?php } ?>
+        <br>
+        <h1>Quản lý:</h1>
     </div>
-
-    <h1>Kênh người bán:</h1>

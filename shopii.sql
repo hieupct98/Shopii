@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2019 at 01:16 PM
+-- Generation Time: Jun 17, 2019 at 07:08 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `categories` (
-  `ID` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -37,7 +37,7 @@ CREATE TABLE `categories` (
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`ID`, `Name`) VALUES
+INSERT INTO `categories` (`id`, `Name`) VALUES
 (1, 'Điện thoại'),
 (2, 'Laptop');
 
@@ -66,12 +66,12 @@ INSERT INTO `products` (`ID`, `name`, `catID`, `price`, `image`, `description`, 
 (9, 'Galaxy S10+', 1, 13000000, 'samsung-galaxy-s10-plus.jpg', 'Thiết kế sang trọng, bóng bẩy', 46, '2019-06-17 11:26:56'),
 (11, 'Samsung galaxy note 8', 1, 100000001, 'samsung-galaxy-note8.jpg', 'galaxy note 8', 12, '2019-06-17 13:39:49'),
 (12, 'iPhone 7+', 1, 151000, 'iphone-7-plus.jpg', 'ccvbn', 6, '2019-06-17 14:13:00'),
-(13, 'acer aspire e5', 2, 10000000, 'acer-aspire-e5.jpg', 'đâscasc', 4, '2019-06-17 16:59:17'),
-(14, 'macbook air', 2, 15000000, 'apple-macbook-air.jpg', 'hswww', 10, '2019-06-17 16:59:39'),
+(13, 'acer aspire e5', 2, 10000000, 'laptop abc.jpg', 'đâscasc', 4, '2019-06-17 16:59:17'),
+(14, 'macbook air', 2, 15000000, 'laptop bcd.jpg', 'hswww', 10, '2019-06-17 16:59:39'),
 (15, 'iPhone XR', 1, 500000, 'iphone-xr.jpg', 'bgtrne rư qư', 15, '2019-06-17 17:00:18'),
-(16, 'laptop abcd', 2, 15100000, 'asus-a411ua.jpg', 'đv tmom oqwok', 16, '2019-06-17 17:00:51'),
-(17, 'dell inspiron', 2, 20000000, 'dell-inspiron-3576.png', 'ssss dddd qqqq', 7, '2019-06-17 17:01:15'),
-(18, 'laptop bc', 2, 10000000, 'dell-vostro-3578.jpg', 'ccs qừ 3t hg', 7, '2019-06-17 17:03:22'),
+(16, 'laptop abcd', 2, 15100000, 'laptop msi.jpg', 'đv tmom oqwok', 16, '2019-06-17 17:00:51'),
+(17, 'dell inspiron', 2, 20000000, 'laptop lenovo.jpg', 'ssss dddd qqqq', 7, '2019-06-17 17:01:15'),
+(18, 'laptop bc', 2, 10000000, 'laptop asus.jpg', 'ccs qừ 3t hg', 7, '2019-06-17 17:03:22'),
 (19, 'iPhone 12', 1, 150000, 'iphone-xr.jpg', 'ssss iphone', 46, '2019-06-17 17:04:31'),
 (20, 'huawei p30', 1, 15000000, 'huawei-p30.jpg', 'h j lppl oop', 10, '2019-06-17 17:06:02');
 
@@ -117,9 +117,7 @@ INSERT INTO `users` (`ID`, `email`, `password`) VALUES
 (3, 'hieupct98@gmail.com', '$2y$10$tEAC6JBv2.e2yPdoRFRuOuc56kX1MfJW.6pT8DsCWuCHGEN/EPeTC'),
 (4, 'hieu@gmail.com', '$2y$10$j62hX9UAFZDAskTt3VM79.RGSjDV.YWDr6u0ixI2Xu5dg4kgqhk/u'),
 (5, 'a@gmail.com', '$2y$10$2yMvS24BOxvPCP90WpOfQeHjT7DHQOMbLgEdgk/RF3tw10hJZ07yO'),
-(6, 'abc@abc.com', '$2y$10$cWpaEQ3UURh63LMUWxVyvOKIwycj68DSAOpL/yBwi1p41.wI8IFwC'),
-(8, 'anhthu@gmail.com', '$2y$10$tAzfeKjoh9Js9rgGLoL0juIM2byzJrGcHjegdgsNYuVHthKD2WLKO'),
-(9, 'a1@gmail.com', '$2y$10$vS1ccpa4JBa56ILK/moboOUoQKNHpHw05lJVO4rMrcd89APzfsn4y');
+(6, 'abc@abc.com', '$2y$10$cWpaEQ3UURh63LMUWxVyvOKIwycj68DSAOpL/yBwi1p41.wI8IFwC');
 
 -- --------------------------------------------------------
 
@@ -146,9 +144,9 @@ INSERT INTO `user_product` (`id`, `userID`, `productID`) VALUES
 (10, 3, 15),
 (11, 3, 16),
 (12, 3, 17),
-(13, 8, 18),
-(14, 8, 19),
-(15, 8, 20);
+(16, 6, 18),
+(17, 6, 19),
+(18, 6, 20);
 
 -- --------------------------------------------------------
 
@@ -172,9 +170,7 @@ INSERT INTO `user_role` (`ID`, `userID`, `roleID`) VALUES
 (3, 3, 2),
 (4, 4, 3),
 (5, 5, 3),
-(6, 6, 3),
-(7, 8, 2),
-(8, 9, 3);
+(6, 6, 2);
 
 --
 -- Indexes for dumped tables
@@ -184,7 +180,7 @@ INSERT INTO `user_role` (`ID`, `userID`, `roleID`) VALUES
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `products`
@@ -229,7 +225,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -253,7 +249,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_product`
 --
 ALTER TABLE `user_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -264,6 +260,12 @@ ALTER TABLE `user_role`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `categories`
+--
+ALTER TABLE `categories`
+  ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`id`) REFERENCES `products` (`catID`);
 
 --
 -- Constraints for table `products`

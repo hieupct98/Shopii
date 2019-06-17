@@ -150,6 +150,12 @@ class Item
         return static::findByQuery($sql);
     }
 
+    static public function topNewProducts($number)
+    {
+        $sql = "SELECT * FROM " . static::$table_name . " ORDER BY create_at DESC LIMIT $number";
+        return static::findByQuery($sql);
+    }
+
     static public function findAll()
     {
         $sql = "SELECT * FROM " . static::$table_name;

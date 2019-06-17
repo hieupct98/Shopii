@@ -8,18 +8,19 @@
     ?>
     <h1>Danh sách sản phẩm của <?php echo $_SESSION['email']; ?></h1>
     <h2><a href="create.php">Thêm sản phẩm</a></h2>
-    <table>
-        <tr>
-            <th>Tên</th>
-            <th>Danh mục</th>
-            <th>Giá</th>
-            <th>Ảnh</th>
-            <th>Mô tả</th>
-            <th>Số lượng</th>
-            <th>Sửa</th>
-            <th>Xoá</th>
-        </tr>
-
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Tên</th>
+                <th scope="col">Danh mục</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Ảnh</th>
+                <th scope="col">Mô tả</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Sửa</th>
+                <th scope="col">Xoá</th>
+            </tr>
+        </thead>
         <?php foreach ($items as $sp) { ?>
         <tr>
             <td><?php echo htmlspecialchars($sp->name); ?></td>
