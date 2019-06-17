@@ -149,6 +149,28 @@
                         </div>
                     </a>
                 </div>
+                <!-- pd6 -->
+                <div class="product">
+                    <a href="detail.php?id=1">
+                        <div class="img-product">
+                            <img src="img/samsung-galaxy-s10-plus.jpg" alt="iphone-7-plus.jpg">
+                        </div>
+                        <div class="infor">
+                            <div class="title-product">
+                                iPhone-7-plus
+                            </div>
+                            <div class="detail">
+                                <div class="price">
+                                    <span>₫</span>
+                                    <span class="cost">100.000</span>
+                                </div>
+                                <div class="buy">
+                                    18769 da ban
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- end list item -->
