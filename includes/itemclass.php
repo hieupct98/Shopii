@@ -153,29 +153,33 @@ class Item
         return $sanitized;
     }
 
+    /**
+     * @return bool
+     */
     public function create()
     {
-        try {
-            self::$database->autocommit(FALSE);
-            $attributes = $this->sanitized_attributes();
-            $sql = "INSERT INTO " . static::$table_name . " (";
-            $sql .= join(', ', array_keys($attributes));
-            $sql .= ") VALUES ('";
-            $sql .= join("', '", array_values($attributes));
-            $sql .= "')";
-            self::$database->query($sql);
-            $this->ID = self::$database->insert_id;
+        self::$database->autocommit(FALSE);
+        $attributes = $this->sanitized_attributes();
+        $sql = "INSERT INTO " . static::$table_name . " (";
+        $sql .= join(', ', array_keys($attributes));
+        $sql .= ") VALUES ('";
+        $sql .= join("', '", array_values($attributes));
+        $sql .= "')";
+        self::$database->query($sql);
+        if (!self::$database->affected_rows) {
+            self::$database->rollback();
+            return false;
+        } else {
             $this->userID = $_SESSION['ID'];
-            echo $this->ID;
-            echo $this->userID;
             $sql2 = "INSERT INTO user_product(userID,productID) VALUE ($this->userID,LAST_INSERT_ID())";
             self::$database->query($sql2);
-            self::$database->autocommit(TRUE);
-            return true;
-        } catch (Exception $e) {
-            self::$database->rollback();
-            throw $e;
-            return false;
+            if (!self::$database->affected_rows) {
+                self::$database->rollback();
+                return false;
+            } else {
+                self::$database->commit();
+                return true;
+            }
         }
     }
 
