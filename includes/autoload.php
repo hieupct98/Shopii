@@ -1,9 +1,7 @@
 <?php
-$public_end = strpos($_SERVER['SCRIPT_NAME'], '/public') + 7;
-$doc_root = substr($_SERVER['SCRIPT_NAME'], 0, $public_end);
-define("WWW_ROOT", $doc_root);
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 require_once("connect.php");
-require_once("itemclass.php");
+require_once("item.class.php");
 require_once("functions.php");
 global $conn;
 Item::setDB($conn);

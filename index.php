@@ -1,6 +1,7 @@
 <?php require_once("includes/header.php"); ?>
 <div class="website">
     <div class="container">
+        <!-- flexslider -->
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1800">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -30,7 +31,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
+        <!-- end flexslider -->
         <!-- begin list item -->
         <div class="boss">
             <div class="wrapper-title-boss">

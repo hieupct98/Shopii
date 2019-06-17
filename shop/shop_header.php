@@ -51,19 +51,30 @@ if (!isSeller()) {
             </div>
         </div>
     </header>
-
-    <?php 
-    if(isset($_SESSION['message']) && $_SESSION['message'] != "") {
-        echo "<div class='alert alert-success' role='alert'>";
-        echo $_SESSION['message'];
-        clearMessage();
-        echo "</div>";
-    } 
-    if (isset($_SESSION['error']) && $_SESSION['error'] != "") {
-        echo "<div class='alert alert-danger' role='alert'>";
-        echo $_SESSION['error'];
-        clearError();
-        echo "</div>";
-    }
-    ?>
+    <br>
+    <div class="container">       
+        <?php if(isset($_SESSION['message']) && $_SESSION['message'] != "") { ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php
+                echo $_SESSION['message'];
+                clearMessage();
+                ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } ?> 
+        <?php if(isset($_SESSION['error']) && $_SESSION['error'] != "") { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php
+                echo $_SESSION['error'];
+                clearError();
+                ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php } ?> 
+    </div>
+    
 

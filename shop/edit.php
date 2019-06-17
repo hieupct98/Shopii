@@ -19,6 +19,7 @@ if (isset($_POST['edit'])) {
     }
     $img = $data['image'];
     $temp = $_FILES['image']['tmp_name'];
+    $data['create_at'] = $item->create_at;
     //truyền dữ liệu vào obj
     $item->merge_attributes($data);
     //đẩy dữ liệu lên database
@@ -32,6 +33,7 @@ if (isset($_POST['edit'])) {
         header("Location:index.php");
     } else {
         $_SESSION['error'] = "Thêm sản phẩm thất bại";
+        header("Location:index.php");
     }
 } ?>
 <div class="container">
