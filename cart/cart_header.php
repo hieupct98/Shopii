@@ -1,8 +1,5 @@
 <?php
 require_once("../includes/autoload.php");
-if (!isAdmin()) {
-    header("Location:../index.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,9 +8,9 @@ if (!isAdmin()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
     <link rel="stylesheet" href="../public/css/bootstrap.css" type="text/css">
-    <title>Shopii - Quản lý</title>
+    <link rel="stylesheet" href="../public/css/style.css" type="text/css">
+    <title>Shopiii - Giỏ hàng</title>
 </head>
 
 <body>
@@ -23,12 +20,15 @@ if (!isAdmin()) {
             <div class="container">
                 <div class="spacebetween">
                     <div>
+                        <?php if (isSeller()) { ?>
+                        <a href="../shop/index.php" class="nav-link">Kênh người bán</a>
+                        <?php } ?>
                         <?php if (isAdmin()) { ?>
-                        <a href="index.php" class="nav-link">Quản lý</a>
+                        <a href="../admin/index.php" class="nav-link">Quản lý</a>
                         <?php } ?>
                     </div>
                     <div class="d-flex">
-                        <a href="../cart/index.php" class="nav-link">Giỏ hàng</a>
+                        <a href="index.php" class="nav-link">Giỏ hàng</a>
                         <?php if (isLoggedIn()) { ?>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
@@ -84,5 +84,4 @@ if (!isAdmin()) {
         </div>
         <?php } ?>
         <br>
-        <h1>Quản lý:</h1>
     </div>

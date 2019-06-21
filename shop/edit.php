@@ -32,8 +32,8 @@ if (isset($_POST['edit'])) {
         }
         header("Location:index.php");
     } else {
-        $_SESSION['error'] = "Thêm sản phẩm thất bại";
-        header("Location:index.php");
+        $_SESSION['error'] = "Sửa sản phẩm thất bại";
+        header("Location:edit.php?id=$id");
     }
 } ?>
 <div class="container">
@@ -72,7 +72,7 @@ if (isset($_POST['edit'])) {
                 value="<?php echo htmlspecialchars($item->price) ?>">
         </div>
 
-        <div class="custom-file">
+        <div class="form-group">
             <label for="image">Chọn ảnh</label>
             <input type="file" class="form-control-file" name="image" id="image"
                 value="<?php echo htmlspecialchars($item->image) ?>">
@@ -85,17 +85,13 @@ if (isset($_POST['edit'])) {
         </div>
 
         <div class="form-group">
-            <label for="item[quantity]">Số lượng: </label>
-            <input type="text" name="item[quantity]" id="item[quantity]" class="form-control"
-                value="<?php echo htmlspecialchars($item->quantity) ?>">
+            <label for="item[stock]">Số lượng: </label>
+            <input type="text" name="item[stock]" id="item[stock]" class="form-control"
+                value="<?php echo htmlspecialchars($item->stock) ?>">
         </div>
         <br><br>
         <input type="submit" class="btn btn-primary" name="edit" value="Lưu">
     </form>
 </div>
 
-
-
-</body>
-
-</html>
+<?php require_once("shop_footer.php"); ?>

@@ -12,7 +12,6 @@ if (isset($_POST['btnSubmit'])) {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
-    echo $password;
     //kiểm tra email hợp lệ
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $check = $conn->prepare("SELECT * FROM users where `email` = ?");
@@ -46,7 +45,7 @@ if (isset($_POST['btnSubmit'])) {
     }
 }
 ?>
-<div class="container">
+<div class="container mt-3">
     <h1>Đăng nhập:</h1>
     <form method="post" action="login.php" style="margin:1% 0 0 2%">
         <div class="form-group">

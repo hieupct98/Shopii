@@ -1,6 +1,5 @@
 <?php
 require_once("autoload.php");
-session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +31,7 @@ session_start();
                         <?php } ?>
                     </div>
                     <div class="d-flex">
-                        <a href="cart.php" class="nav-link">Giỏ hàng</a>
+                        <a href="cart/index.php" class="nav-link">Giỏ hàng</a>
                         <?php if (isLoggedIn()) { ?>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
@@ -40,7 +39,8 @@ session_start();
                                 <?php echo $_SESSION['email']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="logout.php" class="nav-link" style="color:black;">Đăng xuất</a>
+                                <a href="account.php" class="nav-link text-secondary">Tài khoản</a>
+                                <a href="logout.php" class="nav-link text-secondary">Đăng xuất</a>
                             </div>
                         </div>
                         <?php } else { ?>
@@ -62,9 +62,8 @@ session_start();
             </div>
         </div>
     </header>
-    <br>
-    <div class="container">       
-        <?php if(isset($_SESSION['message']) && $_SESSION['message'] != "") { ?>
+    <?php if(isset($_SESSION['message']) && $_SESSION['message'] != "") { ?>
+        <div class="container pt-3">     
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <?php
                 echo $_SESSION['message'];
@@ -85,5 +84,5 @@ session_start();
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-        <?php } ?> 
     </div>
+    <?php } ?> 

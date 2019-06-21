@@ -6,6 +6,10 @@
 <script src="public/js/bootstrap.js"></script>
 <script src="public/js/slick.min.js"></script>
 <script src="public/js/main.js"></script>
+<script src="public/js/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
 </body>
 
 </html>

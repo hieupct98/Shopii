@@ -4,7 +4,7 @@ class Item
     static public $table_name = "Products";
     static public $database;
     static protected $columns = [];
-    static public $db_columns = ['ID', 'name', 'catID', 'price', 'image', 'description', 'quantity', 'create_at'];
+    static public $db_columns = ['ID', 'name', 'catID', 'price', 'image', 'description', 'stock', 'create_at'];
 
     public $ID;
     public $name;
@@ -12,12 +12,13 @@ class Item
     public $price;
     public $image;
     public $descrpition;
-    public $quantity;
+    public $stock;
     public $create_at;
 
     public $userID;
     public $category;
     public $user;
+    public $quantity;
 
     /**
      * Item constructor.
@@ -31,7 +32,7 @@ class Item
         $this->price = $data['price'] ?? '';
         $this->image = $data['image'] ?? '';
         $this->description = $data['description'] ?? '';
-        $this->quantity = $data['quantity'] ?? '';
+        $this->stock = $data['stock'] ?? '';
         $this->create_at = $data['create_at'] ?? '';
     }
 
@@ -58,6 +59,49 @@ class Item
         }
         return $object;
     }
+    
+    //Lấy tên danh mục khi có catID
+    public function getCategory(): string
+    {
+        $catID = $this->catID;
+        $query = "SELECT * FROM categories WHERE id = '$catID'";
+        $result = Item::$database->query($query);
+        $row = $result->fetch_assoc();
+        $category = $row['Name'];
+        return $category;
+    }
+
+    //Lấy tên người bán khi có productID
+    public function getUser()
+    {
+        $query = "SELECT * FROM users INNER JOIN user_product ON users.ID = user_product.userID ";
+        $query .= "INNER JOIN products ON user_product.productID = products.ID WHERE products.ID = '$this->ID'";
+        $result = Item::$database->query($query);
+        $row = $result->fetch_assoc();
+        $user = $row['email'];
+        return $user;
+    }
+
+    public function getUserID()
+    {
+        $query = "SELECT * FROM user_product INNER JOIN products ON ";
+        $query .= "user_product.productID = products.ID WHERE products.ID = '$this->ID'";
+        $result = Item::$database->query($query);
+        $row = $result->fetch_assoc();
+        $user = $row['userID'];
+        return $user;
+    }
+
+    /**
+     * @return int
+     */
+    static public function count_all()
+    {
+        $sql = "SELECT COUNT(*) FROM " . static::$table_name;
+        $result_set = self::$database->query($sql);
+        $row = $result_set->fetch_array();
+        return array_shift($row);
+    }
 
     /**
      * @param $sql
@@ -78,41 +122,6 @@ class Item
         $result->free();
 
         return $object_array;
-    }
-
-    /**
-     * @return mixed
-     */
-    static public function count_all()
-    {
-        $sql = "SELECT COUNT(*) FROM " . static::$table_name;
-        $result_set = self::$database->query($sql);
-        $row = $result_set->fetch_array();
-        return array_shift($row);
-    }
-
-
-    //Lấy tên danh mục khi có catID
-    public function getCategory(): string
-    {
-        $catID = $this->catID;
-        $query = "SELECT * FROM categories WHERE id = '$catID'";
-        $result = Item::$database->query($query);
-        $row = $result->fetch_assoc();
-        $category = $row['Name'];
-        return $category;
-    }
-
-
-    //Lấy tên người bán khi có productID
-    public function getUser()
-    {
-        $query = "SELECT * FROM users INNER JOIN user_product ON users.ID = user_product.userID ";
-        $query .= "INNER JOIN products ON user_product.productID = products.ID WHERE products.ID = '$this->ID'";
-        $result = Item::$database->query($query);
-        $row = $result->fetch_assoc();
-        $user = $row['email'];
-        return $user;
     }
 
     /**
@@ -141,10 +150,24 @@ class Item
             return false;
         }
     }
+    /**
+     * Tìm sản phẩm theo hoá đơn
+     *
+     * @param int $oid
+     * @return array
+     */
+    public static function findByOrder($oid)
+    {
+        $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN orderdetail ON products.ID = orderdetail.productID ";
+        $sql .= "WHERE orderID = '" . self::$database->escape_string($oid) . "'";
+        return static::findByQuery($sql);
+    }
 
     public static function findByCategory($cat)
     {
         $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN user_product ON products.ID = user_product.productID";
         $sql .= " INNER JOIN categories ON products.catID = categories.id ";
         $sql .= "WHERE categories.Name='" . self::$database->escape_string($cat) . "'";
         return static::findByQuery($sql);
@@ -152,37 +175,41 @@ class Item
 
     static public function topNewProducts($number)
     {
-        $sql = "SELECT * FROM " . static::$table_name . " ORDER BY create_at DESC LIMIT $number";
+        $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN user_product ON products.ID = user_product.productID ORDER BY create_at DESC LIMIT $number";
         return static::findByQuery($sql);
     }
 
     static public function findAll()
     {
         $sql = "SELECT * FROM " . static::$table_name;
+        $sql .= " INNER JOIN user_product ON products.ID = user_product.productID";
         return static::findByQuery($sql);
     }
 
     public function delete()
     {
-        self::$database->autocommit(FALSE);
+        self::$database->autocommit(false);
         $sql = "DELETE FROM user_product WHERE productID = $this->ID";
+        echo $sql;
         self::$database->query($sql);
         echo self::$database->affected_rows;
-        if (self::$database->affected_rows <= 0) {
+        if (self::$database->affected_rows < 0) {
             self::$database->rollback();
             return false;
         } else {
-            echo self::$database->affected_rows;
             $sql2 = "DELETE FROM " . static::$table_name . " ";
             $sql2 .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
             $sql2 .= "LIMIT 1";
+            echo $sql2;
             self::$database->query($sql2);
             echo self::$database->affected_rows;
-            if (self::$database->affected_rows <= 0) {
+            if (self::$database->affected_rows < 0) {
                 self::$database->rollback();
                 return false;
             } else {
                 self::$database->commit();
+                self::$database->autocommit(true);
                 return true;
             }
         }

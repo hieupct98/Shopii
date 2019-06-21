@@ -17,6 +17,7 @@
                 <th scope="col">Ảnh</th>
                 <th scope="col">Mô tả</th>
                 <th scope="col">Số lượng</th>
+                <th scope="col">Ngày tạo</th>
                 <th scope="col">Sửa</th>
                 <th scope="col">Xoá</th>
             </tr>
@@ -34,7 +35,8 @@
             <td style="width:200px"><img style="width:100%" src="../img/<?php echo htmlspecialchars($sp->image); ?>"
                     alt="<?php echo htmlspecialchars($sp->name); ?>"></td>
             <td><?php echo htmlspecialchars($sp->description); ?></td>
-            <td><?php echo htmlspecialchars($sp->quantity); ?></td>
+            <td><?php echo htmlspecialchars($sp->stock); ?></td>
+            <td><?php echo htmlspecialchars(dateFormat($sp->create_at)); ?></td>
             <td><a href="edit.php?id=<?php echo $sp->ID; ?>">Sửa</a></td>
             <td><a href="delete.php?id=<?php echo $sp->ID; ?>">Xoá</a></td>
         </tr>
@@ -48,7 +50,4 @@
     </table>
 </div>
 
-
-</body>
-
-</html>
+<?php require_once("shop_footer.php"); ?>

@@ -2,7 +2,7 @@
 <div class="website">
     <div class="container">
         <!-- flexslider -->
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1800">
+        <div id="carouselExampleIndicators" class="carousel slide mt-3" data-ride="carousel" data-interval="1800">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -32,148 +32,6 @@
             </a>
         </div>
         <!-- end flexslider -->
-        <!-- begin list item -->
-        <div class="boss">
-            <div class="wrapper-title-boss">
-                San pham moi
-            </div>
-            
-            <div class="wrapper-category product-new slider slider-nav">
-                <!-- pd1 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/iphone-7-plus.jpg" alt="iphone-7-plus.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- pd2 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/oppo-a5s.jpg" alt="oppo-a5s.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- pd3 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/iphone-7-plus.jpg" alt="iphone-7-plus.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- pd4 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/samsung-galaxy-note8.jpg" alt="samsung-galaxy-note8.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- pd5 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/samsung-galaxy-s10-plus.jpg" alt="iphone-7-plus.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- pd6 -->
-                <div class="product">
-                    <a href="detail.php?id=1">
-                        <div class="img-product">
-                            <img src="img/samsung-galaxy-s10-plus.jpg" alt="iphone-7-plus.jpg">
-                        </div>
-                        <div class="infor">
-                            <div class="title-product">
-                                iPhone-7-plus
-                            </div>
-                            <div class="detail">
-                                <div class="price">
-                                    <span>₫</span>
-                                    <span class="cost">100.000</span>
-                                </div>
-                                <div class="buy">
-                                    18769 da ban
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- end list item -->
         <br>
         <!-- list item sp mới -->
         <div class="boss">
@@ -186,7 +44,7 @@
                 $items = Item::topNewProducts(6);
                 foreach ($items as $sp) { ?>
                 <div class="product">
-                    <a href="detail.php?id=<?php echo $sp->ID; ?>">
+                    <a href="productdetail.php?id=<?php echo $sp->ID; ?>">
                         <div class="img-product">
                             <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
                             alt="<?php echo htmlspecialchars($sp->name); ?>">
@@ -201,7 +59,7 @@
                                     <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
                                 </div>
                                 <div class="buy">
-                                <?php echo htmlspecialchars($sp->quantity) . " còn lại"; ?>
+                                <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +83,7 @@
                 $items = Item::findByCategory($cat->Name);
                 foreach ($items as $sp) { ?>
                 <div class="product">
-                    <a href="detail.php?id=<?php echo $sp->ID; ?>">
+                    <a href="productdetail.php?id=<?php echo $sp->ID; ?>">
                         <div class="img-product">
                             <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
                             alt="<?php echo htmlspecialchars($sp->name); ?>">
@@ -240,7 +98,7 @@
                                     <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
                                 </div>
                                 <div class="buy">
-                                <?php echo htmlspecialchars($sp->quantity) . " còn lại"; ?>
+                                <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
                                 </div>
                             </div>
                         </div>

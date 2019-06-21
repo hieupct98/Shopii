@@ -1,7 +1,6 @@
 <?php
 require_once("../includes/autoload.php");
-session_start();
-if (!isSeller()) {
+if (!isSeller() && !isAdmin()) {
     header("Location:../index.php");
 }
 ?>
@@ -27,9 +26,12 @@ if (!isSeller()) {
                         <?php if (isSeller()) { ?>
                         <a href="index.php" class="nav-link">Kênh người bán</a>
                         <?php } ?>
+                        <?php if (isAdmin()) { ?>
+                        <a href="../admin/index.php" class="nav-link">Quản lý</a>
+                        <?php } ?>
                     </div>
                     <div class="d-flex">
-                        <a href="../cart.php" class="nav-link">Giỏ hàng</a>
+                        <a href="../cart/index.php" class="nav-link">Giỏ hàng</a>
                         <?php if (isLoggedIn()) { ?>
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink"
@@ -37,7 +39,8 @@ if (!isSeller()) {
                                 <?php echo $_SESSION['email']; ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a href="../logout.php" class="nav-link" style="color:black;">Đăng xuất</a>
+                                <a href="../account.php" class="nav-link text-secondary">Tài khoản</a>
+                                <a href="../logout.php" class="nav-link text-secondary">Đăng xuất</a>
                             </div>
                         </div>
                         <?php } else { ?>
@@ -83,6 +86,6 @@ if (!isSeller()) {
             </button>
         </div>
         <?php } ?>
+        <br>
+        <h1>Kênh người bán:</h1>
     </div>
-
-    <h1>Kênh người bán:</h1>

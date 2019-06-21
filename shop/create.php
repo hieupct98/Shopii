@@ -59,14 +59,12 @@ if (isset($_POST['add'])) {
         </div>
 
         <div class="form-group">
-            <label for="item[quantity]">Số lượng: </label>
-            <input type="text" class="form-control" name="item[quantity]" id="item[quantity]">
+            <label for="item[stock]">Số lượng: </label>
+            <input type="text" class="form-control" name="item[stock]" id="item[stock]">
         </div>
         <br><br>
         <input type="submit" class="btn btn-primary" name="add" value="Thêm sản phẩm">
     </form>
 </div>
 
-</body>
-
-</html>
+<?php require_once("shop_footer.php"); ?>

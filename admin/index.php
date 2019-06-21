@@ -20,7 +20,7 @@
             <td><?php echo htmlspecialchars($user->email); ?></td>
             <td><?php echo htmlspecialchars($user->getRole()); ?></td>
             <td><?php echo htmlspecialchars($user->productsCount()); ?></td>
-            <td><a href="../user_product.php?id=<?php echo $user->ID; ?>">Xem danh sách</a></td>
+            <td><a href="../user_product.php?uid=<?php echo $user->ID; ?>">Xem danh sách</a></td>
             <td><a href="delete.php?id=<?php echo $user->ID; ?>">Xoá</a></td>
         </tr>
         <?php } ?>

@@ -46,6 +46,28 @@ class Admin
         return $object;
     }
 
+    public function attributes()
+    {
+        $attributes = [];
+        foreach (static::$db_columns as $column) {
+            if ($column == 'ID') {
+                continue;
+            }
+            $attributes[$column] = $this->$column;
+        }
+        return $attributes;
+    }
+
+    //chống SQL Injection
+    protected function sanitized_attributes()
+    {
+        $sanitized = [];
+        foreach ($this->attributes() as $key => $value) {
+            $sanitized[$key] = self::$database->real_escape_string($value);
+        }
+        return $sanitized;
+    }
+
     public function getRole()
     {
         $query = "SELECT * FROM users INNER JOIN user_role ON users.ID = user_role.userID ";
@@ -102,23 +124,44 @@ class Admin
         } else {
             $sql2 = "DELETE FROM user_role WHERE userID = $this->ID";
             self::$database->query($sql2);
-            if (self::$database->affected_rows <= 0) {
+            if (self::$database->affected_rows < 0) {
                 self::$database->rollback();
                 return false;
             } else {
-                $sql3 = "DELETE FROM " . static::$table_name . " ";
-                $sql3 .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
-                $sql3 .= "LIMIT 1";
+                $sql3 = "DELETE FROM user_order WHERE userID = $this->ID";
                 self::$database->query($sql3);
-                if (self::$database->affected_rows <= 0) {
+                if (self::$database->affected_rows < 0) {
                     self::$database->rollback();
                     return false;
-                } else {
-                    self::$database->commit();
-                    return true;
+                } else {    
+                    $sql4 = "DELETE FROM " . static::$table_name . " ";
+                    $sql4 .= "WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
+                    $sql4 .= "LIMIT 1";
+                    self::$database->query($sql4);
+                    if (self::$database->affected_rows < 0) {
+                        self::$database->rollback();
+                        return false;
+                    } else {
+                        self::$database->commit();
+                        return true;
+                    }
                 }
             }
         }
+    }
+
+    public function update()
+    {
+        $attributes = $this->sanitized_attributes();
+        $attribute_pairs = [];
+        foreach ($attributes as $key => $value) {
+            $attribute_pairs[] = "{$key}='{$value}'";
+        }
+        $sql = "UPDATE " . static::$table_name . " SET ";
+        $sql .= join(', ', $attribute_pairs);
+        $sql .= " WHERE ID='" . self::$database->escape_string($this->ID) . "' ";
+        $result = self::$database->query($sql);
+        return $result;
     }
 
     public function productsCount()

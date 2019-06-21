@@ -30,3 +30,13 @@ function priceFormat($price)
     $decimal_place = 0;
     return number_format($price, $decimal_place, '', $symbol_thousand);
 }
+/**
+ * Undocumented function
+ *
+ * @param string $datetime
+ * @return date
+ */
+function dateFormat($datetime)
+{
+    return date("d-m-Y H:i:s",strtotime($datetime));
+}

@@ -30,7 +30,7 @@ if (isset($_POST['btnSubmit'])) {
         $error["email"] = "Email không hợp lệ";
     }
 
-    if (empty($error["email"]) && empty($error["password"])) {
+    if (empty(array_filter($error))) {
         $conn->autocommit(FALSE);
         $insert = $conn->prepare("INSERT INTO users(email, password) VALUES (?, ?)");
         $insert->bind_param('ss', $email, $password);
