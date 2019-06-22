@@ -39,7 +39,7 @@ $sql .= " OFFSET {$pagination->offset()}";
 $category = Category::findAll();
 ?>
 <div class="bg_grey">
-    <div class="d-flex" style="margin:0 5px;">
+    <div class="d-flex mx-3">
         <!-- sidebar show categories -->
         <div class="sidebar-category w-25 mr-3 my-4">
             <div class="CatList">
@@ -70,7 +70,7 @@ $category = Category::findAll();
             <!-- vùng hiển thị lựa chọn sắp xếp -->
             <div class="SortSection spacebetween my-4">
                 <div>Sắp xếp theo:</div>
-                <div>
+                <div class="mr-5">
                     <select id="ddlSort">
                         <option value="products.php?<?php echo queryString("sort","time"); ?>"
                             <?php if (isset($_GET['sort']) && $_GET['sort'] == "time") echo 'selected="selected"'; ?>>
@@ -114,7 +114,7 @@ $category = Category::findAll();
                 <?php } ?>    
             </div>
             <div>
-                <ul class="pagination">
+                <ul class="pagination mt-3 mx-5">
                     <li class="page-item <?php if($pagination->previous_page()===false) echo 'disabled'; ?>">
                         <a class="page-link"
                             href="products.php?<?php echo queryString("page",$pagination->previous_page()); ?>">Previous</a>
