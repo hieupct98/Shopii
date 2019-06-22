@@ -10,7 +10,7 @@ if (!isLoggedIn()) {
     $orders = Order::findByUser($id);
 }
 ?>
-<div class="account_website">
+<div class="bg_grey">
     <div class="container d-flex">
         <div class="sidebar w-25">
             <p class="text-secondary py-5 hello">Xin chào <?php echo $_SESSION['email']; ?></p>
@@ -18,11 +18,11 @@ if (!isLoggedIn()) {
             <div class="my-4"><a href="user_order.php" style="color:#ee4d2d;" class="user-link">Đơn hàng</a></div>
         </div>
         <div class="w-75">
-            <div class="profile my-4 pt-4 px-3">
+            <div class="bg-white my-4 pt-4 px-3">
                 <p class="pb-5 mb-2 hello">Đơn hàng của tôi</p>
             </div>
             <?php foreach ($orders as $order) { ?>
-            <div class="profile my-5">
+            <div class="bg-white my-5">
                 <div class="my-3 px-3 pt-3 orderinfo">
                     Đơn hàng #<?php echo $order->ID; ?><br>
                     <p class="text-secondary">

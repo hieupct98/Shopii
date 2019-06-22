@@ -1,8 +1,8 @@
 <?php require_once("includes/header.php"); ?>
-<div class="website">
+<div class="website bg_grey pt-3">
     <div class="container">
         <!-- flexslider -->
-        <div id="carouselExampleIndicators" class="carousel slide mt-3" data-ride="carousel" data-interval="1800">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="1800">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                 <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -10,16 +10,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100" src="img/slide1.jpg"
-                        alt="First slide">
+                    <img class="d-block w-100" src="img/slide1.jpg" alt="First slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="img/slide2.jpg"
-                        alt="Second slide">
+                    <img class="d-block w-100" src="img/slide2.jpg" alt="Second slide">
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100" src="img/slide3.jpg"
-                        alt="Third slide">
+                    <img class="d-block w-100" src="img/slide3.jpg" alt="Third slide">
                 </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -34,11 +31,11 @@
         <!-- end flexslider -->
         <br>
         <!-- list item sp mới -->
-        <div class="boss">
-            <div class="wrapper-title-boss">
-                Sản phẩm mới
+        <div class="boss bg-white my-3">
+            <div class="spacebetween" style="align-items:baseline;">
+                <div class="wrapper-title-boss">Sản phẩm mới</div>
+                <div class="mr-3"><a href="products.php">Xem tất cả</a></div>
             </div>
-            
             <div class="wrapper-category product-new slider slider-nav">
                 <?php
                 $items = Item::topNewProducts(6);
@@ -46,8 +43,8 @@
                 <div class="product">
                     <a href="productdetail.php?id=<?php echo $sp->ID; ?>">
                         <div class="img-product">
-                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
-                            alt="<?php echo htmlspecialchars($sp->name); ?>">
+                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>"
+                                alt="<?php echo htmlspecialchars($sp->name); ?>">
                         </div>
                         <div class="infor">
                             <div class="title-product">
@@ -59,7 +56,7 @@
                                     <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
                                 </div>
                                 <div class="buy">
-                                <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
+                                    <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
                                 </div>
                             </div>
                         </div>
@@ -67,16 +64,20 @@
                 </div>
                 <?php } ?>
             </div>
+        </div>
         <!-- end list item sp mới -->
         <!-- list item Category -->
         <?php
         $category = Category::findAll();
-        foreach ($category as $cat) { ?>      
-        <div class="boss">
-            <div class="wrapper-title-boss">
-                <?php echo htmlspecialchars($cat->Name); ?>
+        foreach ($category as $cat) { ?>
+        <div class="boss bg-white my-3">
+            <div class="spacebetween" style="align-items:baseline;">
+                <div class="wrapper-title-boss">
+                    <?php echo htmlspecialchars($cat->Name); ?>
+                </div>
+                <div class="mr-3"><a href="products.php?catID=<?php echo htmlspecialchars($cat->id); ?>">Xem tất cả</a></div>
             </div>
-            
+
             <div class="wrapper-category product-new slider slider-nav">
                 <!-- pd1 -->
                 <?php
@@ -85,8 +86,8 @@
                 <div class="product">
                     <a href="productdetail.php?id=<?php echo $sp->ID; ?>">
                         <div class="img-product">
-                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>" 
-                            alt="<?php echo htmlspecialchars($sp->name); ?>">
+                            <img src="img/<?php echo htmlspecialchars($sp->image); ?>"
+                                alt="<?php echo htmlspecialchars($sp->name); ?>">
                         </div>
                         <div class="infor">
                             <div class="title-product">
@@ -98,7 +99,7 @@
                                     <span class="cost"><?php echo priceFormat(htmlspecialchars($sp->price)); ?></span>
                                 </div>
                                 <div class="buy">
-                                <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
+                                    <?php echo htmlspecialchars($sp->stock) . " còn lại"; ?>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +107,8 @@
                 </div>
                 <?php } ?>
             </div>
-            <br>  
+            <br>
+        </div>
         <?php } ?>
         <!-- end list item -->
     </div>

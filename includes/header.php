@@ -53,10 +53,10 @@ require_once("autoload.php");
                     <div class="htext">
                         <a class="nav-link" href="index.php">Shopii</a>
                     </div>
-                    <form class="form-inline frmSearch my-2 my-lg-0 ml-lg-5">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm"
-                            aria-label="Search">
-                        <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                    <form action="products.php" method="get" class="form-inline frmSearch my-2 my-lg-0 ml-lg-5">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Tìm sản phẩm"
+                            id="txtFind" aria-label="Search">
+                        <input type="submit" class="btn btn-primary" id="btnFind" value="Tìm kiếm">
                     </form>
                 </div>
             </div>

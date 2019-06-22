@@ -1,2 +1,4 @@
 #ignore folder named .idea
 .idea/
+#ignore file named test.php
+test.php

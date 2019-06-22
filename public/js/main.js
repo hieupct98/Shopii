@@ -12,7 +12,7 @@ $(document).ready(function () {
   });
   function numberWithDots(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-  }
+  };
   $('.update_quantity').change(function () {
     var elem = $(this);
     var id = $(this).closest('td').find('.product_id').text();
@@ -35,5 +35,9 @@ $(document).ready(function () {
     e.preventDefault();
     var userID =$('#userID').text();
     window.location.href = "user_product.php?uid=" + userID;
+  });
+  $('#ddlSort').change(function (e) { 
+    e.preventDefault();
+    window.location.href = $(this).val();
   });
 });

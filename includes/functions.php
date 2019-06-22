@@ -40,3 +40,16 @@ function dateFormat($datetime)
 {
     return date("d-m-Y H:i:s",strtotime($datetime));
 }
+/**
+ * thêm param vào query string của URL
+ *
+ * @param string $get
+ * @param mixed $value
+ * @return string
+ */
+function queryString ($get,$value)
+{
+    $query = $_GET;
+    $query[$get] = $value;
+    return http_build_query($query);
+}

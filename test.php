@@ -18,10 +18,16 @@ require_once("includes/autoload.php");
 // echo $sql3;
 $arr['a'] = "";
 $arr['b'] = "";
-$arr['c'] = "a";
+$arr['c'] = "";
 if (!empty(array_filter($arr))) {
     echo 'not empty';
 } else {
     echo 'EMPTY ARRAY';
 }
+$sql = "SELECT * FROM products INNER JOIN user_product ON products.ID = user_product.productID ";
+$count_sql = str_replace("*","COUNT(*)",$sql);
+echo "<br>" . $sql . "<br>" . $count_sql;
+?>  
+<a href="<?php echo $_SERVER['PHP_SELF']; ?>?<?php echo queryString("abc",3); ?>">Link</a>
+<?php
 ?>

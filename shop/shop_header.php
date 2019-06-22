@@ -53,10 +53,10 @@ if (!isSeller() && !isAdmin()) {
                     <div class="htext">
                         <a class="nav-link" href="../index.php">Shopii</a>
                     </div>
-                    <form class="form-inline my-2 my-lg-0 ml-lg-5">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Tìm sản phẩm"
+                    <form action="../products.php" method="get" class="form-inline my-2 my-lg-0 ml-lg-5">
+                        <input class="form-control mr-sm-2" id="txtFind" name="search" type="search" placeholder="Tìm sản phẩm"
                             aria-label="Search">
-                        <input type="submit" class="btn btn-primary" value="Tìm kiếm">
+                        <input type="submit" class="btn btn-primary" id="btnFind2" value="Tìm kiếm">
                     </form>
                 </div>
             </div>

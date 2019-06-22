@@ -105,7 +105,7 @@ class Item
 
     /**
      * @param $sql
-     * @return array
+     * @return Item array
      */
     static public function findByQuery($sql)
     {

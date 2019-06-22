@@ -176,7 +176,7 @@ img {
     background: #f05d40;
 }
 
-.account_website {
+.bg_grey {
     background-color: #f5f5f5;
 }
 
@@ -188,7 +188,7 @@ img {
     color: #ee4d2d;
 }
 
-.profile {
+.bg-white {
     background-color: #FFF;
 }
 
@@ -203,4 +203,13 @@ img {
 
 .orderinfo {
     border-bottom: 1px solid #EFEFEF;
+}
+
+.product_website {
+    background-color: #F5F5F5;
+}
+
+.ProductList {
+    display: flex;
+    flex-wrap: wrap;
 }

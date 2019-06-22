@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2019 at 04:53 PM
+-- Generation Time: Jun 22, 2019 at 04:25 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.10
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `shopii`
 --
+CREATE DATABASE IF NOT EXISTS `shopii` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `shopii`;
 
 -- --------------------------------------------------------
 
@@ -44,6 +46,52 @@ INSERT INTO `categories` (`id`, `Name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orderdetail`
+--
+
+CREATE TABLE `orderdetail` (
+  `orderID` int(11) NOT NULL,
+  `productID` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orderdetail`
+--
+
+INSERT INTO `orderdetail` (`orderID`, `productID`, `quantity`) VALUES
+(1, 24, 2),
+(1, 25, 1),
+(2, 24, 3),
+(2, 9, 2),
+(3, 12, 2),
+(4, 9, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `ID` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `create_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`ID`, `total`, `create_at`) VALUES
+(1, 10300000, '2019-06-21 18:03:21'),
+(2, 26450000, '2019-06-21 18:05:18'),
+(3, 302000, '2019-06-21 20:20:46'),
+(4, 91000000, '2019-06-21 22:22:00');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -63,7 +111,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`ID`, `name`, `catID`, `price`, `image`, `description`, `stock`, `create_at`) VALUES
-(9, 'Galaxy S10+', 1, 13000000, 'samsung-galaxy-s10-plus.jpg', 'Thiết kế sang trọng, bóng bẩy', 44, '2019-06-17 11:26:56'),
+(9, 'Galaxy S10+', 1, 13000000, 'samsung-galaxy-s10-plus.jpg', 'Thiết kế sang trọng, bóng bẩy', 37, '2019-06-17 11:26:56'),
 (11, 'Samsung galaxy note 8', 1, 100000001, 'samsung-galaxy-note8.jpg', 'galaxy note 8', 12, '2019-06-17 13:39:49'),
 (12, 'iPhone 7+', 1, 151000, 'iphone-7-plus.jpg', 'ccvbn', 4, '2019-06-17 14:13:00'),
 (15, 'iPhone XR', 1, 500000, 'iphone-xr.jpg', 'bgtrne rư qư', 20, '2019-06-17 17:00:18'),
@@ -74,7 +122,22 @@ INSERT INTO `products` (`ID`, `name`, `catID`, `price`, `image`, `description`, 
 (20, 'huawei p30', 1, 15000000, 'huawei-p30.jpg', 'h j lppl oop', 10, '2019-06-17 17:06:02'),
 (22, 'acer aspire e5', 2, 15000000, 'laptop abc.jpg', 'ssss ffqw qư qc sac', 7, '2019-06-18 10:27:30'),
 (24, 'laptop samsung', 2, 150000, 'laptop samsung.jpg', 'sssf qư', 5, '2019-06-18 10:28:45'),
-(25, 'laptop e', 2, 10000000, 'laptop asus 2.jpg', 'bbf a', 6, '2019-06-18 10:29:44');
+(25, 'laptop e', 2, 10000000, 'laptop asus 2.jpg', 'bbf a', 6, '2019-06-18 10:29:44'),
+(26, 'vivo v15', 1, 5000001, 'vivo-v15-quanghai-400x400.jpg', 'Vivoooooo', 25, '2019-06-22 21:11:01'),
+(27, 'Huawei Y7', 1, 1000050, 'huawei-y7-pro-2019-1-400x400.jpg', 'âcscasc ', 20, '2019-06-22 21:12:15'),
+(28, 'Blackberry k2', 1, 15101000, 'blackberry-key2-4-400x400.jpg', 'bác học', 25, '2019-06-22 21:13:08'),
+(29, 'iPhone 6s+', 1, 5000000, 'iphone-6s-plus-32gb-400x400.jpg', 'hhhhh uuuu', 25, '2019-06-22 21:13:59'),
+(30, 'Xiaomi mi 8 lite', 1, 10000000, 'xiaomi-mi-8-lite-black-18thangbh-400x400.jpg', 'cccc ooo hay hya', 25, '2019-06-22 21:15:18'),
+(31, 'realme 3', 1, 2500000, 'realme-3-pro-blue-2nambh-400x400.jpg', 'điện thoại cao cấp', 25, '2019-06-22 21:15:46'),
+(32, 'laptop hịn', 2, 10000000, 'laptop asus 2.jpg', 'laptop siêuuuuuuuuu xịn', 25, '2019-06-22 21:16:18'),
+(33, 'iPhone 7-', 1, 39990000, 'iphone-6s-plus-32gb-400x400.jpg', 'điện thoại iphone 7-', 20, '2019-06-22 21:17:05'),
+(34, 'asus k51', 2, 10000000, 'laptop abc.jpg', 'Laptop của asus', 25, '2019-06-22 21:17:33'),
+(35, 'macbook pro 5', 2, 10000000, 'laptop bcd.jpg', 'macbook mới nhất', 25, '2019-06-22 21:18:09'),
+(36, 'Samsung galaxy note 9+', 1, 15000000, 'samsung-galaxy-s10-plus.jpg', 'jjjuuu abd đẹp', 65, '2019-06-22 21:18:44'),
+(37, 'huawei nova 3i', 1, 3650000, 'huawei-y7-pro-2019-1-400x400.jpg', 'điện thoại chống nước', 45, '2019-06-22 21:19:36'),
+(38, 'samsung s650', 1, 7000000, 'samsung-galaxy-note8.jpg', 'máy samsung chạy ios', 38, '2019-06-22 21:20:27'),
+(39, 'acer b52', 2, 5000000, 'laptop samsung.jpg', 'laptop đời cũ', 38, '2019-06-22 21:22:15'),
+(40, 'samsung K980', 2, 10000000, 'laptop abc.jpg', 'laptop abccccccc', 40, '2019-06-22 21:22:52');
 
 -- --------------------------------------------------------
 
@@ -124,6 +187,27 @@ INSERT INTO `users` (`ID`, `email`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `user_order`
+--
+
+CREATE TABLE `user_order` (
+  `userID` int(11) NOT NULL,
+  `orderID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_order`
+--
+
+INSERT INTO `user_order` (`userID`, `orderID`) VALUES
+(7, 1),
+(4, 2),
+(7, 3),
+(2, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_product`
 --
 
@@ -148,7 +232,22 @@ INSERT INTO `user_product` (`userID`, `productID`) VALUES
 (6, 20),
 (3, 22),
 (3, 24),
-(3, 25);
+(3, 25),
+(3, 26),
+(3, 27),
+(3, 28),
+(3, 29),
+(2, 30),
+(2, 31),
+(2, 32),
+(2, 33),
+(2, 34),
+(2, 35),
+(2, 36),
+(2, 37),
+(2, 38),
+(2, 39),
+(2, 40);
 
 -- --------------------------------------------------------
 
@@ -185,6 +284,19 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orderdetail`
+--
+ALTER TABLE `orderdetail`
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `productID` (`productID`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -202,6 +314,13 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `user_order`
+--
+ALTER TABLE `user_order`
+  ADD KEY `orderID` (`orderID`),
+  ADD KEY `userID` (`userID`);
 
 --
 -- Indexes for table `user_product`
@@ -228,10 +347,16 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -250,10 +375,24 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `orderdetail`
+--
+ALTER TABLE `orderdetail`
+  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`ID`),
+  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`productID`) REFERENCES `products` (`ID`);
+
+--
 -- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`catID`) REFERENCES `categories` (`id`);
+
+--
+-- Constraints for table `user_order`
+--
+ALTER TABLE `user_order`
+  ADD CONSTRAINT `user_order_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`ID`),
+  ADD CONSTRAINT `user_order_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`ID`);
 
 --
 -- Constraints for table `user_product`

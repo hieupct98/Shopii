@@ -39,14 +39,14 @@ if (isset($_POST['change'])) {
     }
 }
 ?>
-<div class="account_website">
+<div class="bg_grey">
     <div class="container d-flex">
         <div class="sidebar col-xl-3">
             <p class="text-secondary py-5 hello">Xin chào <?php echo $_SESSION['email']; ?></p>
             <div class="my-4"><a href="account.php" style="color:#ee4d2d;" class="user-link my-5">Đổi mật khẩu</a></div>
             <div class="my-4"><a href="user_order.php" class="user-link">Đơn hàng</a></div>
         </div>
-        <div class="profile col-xl-9 mt-4 mb-5">
+        <div class="bg-white col-xl-9 mt-4 mb-5">
             <p class="mt-4 pb-5 hello">Hồ sơ của tôi</p>
                 <div class="d-flex">
                     <div class="w-25 px-2 my-3 text-right text-secondary">Email</div>
