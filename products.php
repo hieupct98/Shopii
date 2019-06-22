@@ -39,15 +39,21 @@ $sql .= " OFFSET {$pagination->offset()}";
 $category = Category::findAll();
 ?>
 <div class="bg_grey">
-    <div class="container d-flex">
-        <!-- sidebar hiển thị các category -->
-        <div class="sidebarCategory w-25 mr-3 my-4">
+    <div class="d-flex" style="margin:0 5px;">
+        <!-- sidebar show categories -->
+        <div class="sidebar-category w-25 mr-3 my-4">
             <div class="CatList">
-                <a href="products.php" class="CatListHeader">Tất cả sản phẩm</a>
+                <div class="cat-list-title">
+                    <a href="products.php" class="CatListHeader">Tất cả sản phẩm</a>
+                </div>
                 <div class="CatListBody">
                     <?php
                     foreach ($category as $cat) {
-                        echo "<a href='products.php?catID={$cat->id}'>$cat->Name</a>";
+                        echo "<a href='products.php?catID={$cat->id}' class='cat-list user-link'";
+                        if (isset($_GET['catID'])) {
+                            if ($catID == $cat->id) echo " style='color:#ee4d2d; font-weight: 700;'";
+                        }
+                        echo ">$cat->Name</a>";
                         echo "<br>";    
                     } 
                     ?>

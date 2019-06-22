@@ -30,9 +30,9 @@
         </div>
         <!-- end flexslider -->
         <br>
-        <!-- list item sp mới -->
-        <div class="boss bg-white my-3">
-            <div class="spacebetween" style="align-items:baseline;">
+        <!-- list item new product-->
+        <div class="boss my-3">
+            <div class="spacebetween wrapper-title" style="align-items:baseline;">
                 <div class="wrapper-title-boss">Sản phẩm mới</div>
                 <div class="mr-3"><a href="products.php">Xem tất cả</a></div>
             </div>
@@ -70,8 +70,8 @@
         <?php
         $category = Category::findAll();
         foreach ($category as $cat) { ?>
-        <div class="boss bg-white my-3">
-            <div class="spacebetween" style="align-items:baseline;">
+        <div class="boss my-3">
+            <div class="spacebetween wrapper-title" style="align-items:baseline;">
                 <div class="wrapper-title-boss">
                     <?php echo htmlspecialchars($cat->Name); ?>
                 </div>

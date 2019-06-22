@@ -117,6 +117,11 @@ img {
     background: #fff;
 }
 
+.wrapper-title{
+    border: solid 2px #ee4d2d;
+    /* margin: 5px; */
+}
+
 .product:hover {
     border: solid 1px #ee4d2d;
 }
@@ -125,21 +130,21 @@ img {
     color: #ee4d2d;
 }
 
-.wrapper-category .detail {
+.product .detail {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
 }
 
-.wrapper-category .infor {
+.product .infor {
     padding: 5px;
 }
 
-.wrapper-category .cost {
+.product .cost {
     font-size: 1rem;
 }
 
-.wrapper-category .buy {
+.product .buy {
     font-size: 0.75rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -212,4 +217,19 @@ img {
 .ProductList {
     display: flex;
     flex-wrap: wrap;
+}
+
+.cat-list-title{
+    text-transform: capitalize;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    padding-bottom: 8px;
+    margin-bottom: 5px;
+}
+.cat-list-title a{
+    font-weight: 700;
+
+}
+
+.sidebar-category a{
+    color: #000;
 }
